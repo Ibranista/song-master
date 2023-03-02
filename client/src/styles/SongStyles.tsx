@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "@emotion/styled";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getSongsFetch, removeOneSong } from "../features/songSlice";
 type Song = {
   _id: string;
   title: string;
@@ -59,8 +61,19 @@ const SongGenre = styled.p`
   font-size: 16px;
   margin: 8px 0;
 `;
+const SongButton = styled.button`
+  width: 50%;
+`;
+const SongList = () => {
+  const songs = useSelector((state: any) => state.songs.songs);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getSongsFetch());
+  }, [dispatch,songs]);
+  const removeSong = (id: string) => {
+    dispatch(removeOneSong(id));
+  };
 
-const SongList = ({ songs }: Props) => {
   return (
     <>
       <ContainerWrapper>
@@ -79,6 +92,9 @@ const SongList = ({ songs }: Props) => {
               <SongArtist>{song.artist}</SongArtist>
               <SongAlbum>Album: {song.album}</SongAlbum>
               <SongGenre>Genre: {song.genre}</SongGenre>
+              <SongButton onClick={() => removeSong(song._id)}>
+                Delete Me
+              </SongButton>
             </SongDetailsContainer>
           </Container>
         ))}

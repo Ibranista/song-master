@@ -46,10 +46,22 @@ function* addSongs(action: any) {
     console.log(error);
   }
 }
+// remove one song
+const removeSongUrl = "/api/songs/";
+function* removeSong(action: any) {
+  try {
+    const song: { data: any } = yield call(() =>
+      axios.delete(removeSongUrl + action.payload)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 function* songSaga() {
   yield takeEvery("songs/getSongsFetch", getAllSongs);
   yield takeEvery("songs/addSong", addSongs);
+  yield takeEvery("songs/removeOneSong", removeSong);
 }
 
 export default songSaga;

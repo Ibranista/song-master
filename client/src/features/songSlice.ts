@@ -19,13 +19,21 @@ export const songSlice = createSlice({
     },
     addSong: (state, action) => {
       state.songs.push(action.payload);
-      console.log('add song: ',action.payload);
+      console.log("add song: ", action.payload);
       console.log(state.songs);
+    },
+    removeOneSong: (state, action) => {
+      state.songs;
     },
   },
 });
 
-export const { getSongsFetch, getSongsSuccess, getSongsFailure,addSong } =
-  songSlice.actions;
+export const {
+  getSongsFetch,
+  getSongsSuccess,
+  getSongsFailure,
+  addSong,
+  removeOneSong,
+} = songSlice.actions;
 
 export default songSlice.reducer;

@@ -13,13 +13,7 @@ function Home() {
   return (
     <>
       <h1>list of songs</h1>
-      <SongList
-        bg="primary"
-        color="white"
-        artistName="Ibrahim"
-        artistImageUrl="url"
-        songs={songs}
-      >
+      <SongList>
         <h1>ok</h1>
       </SongList>
     </>
