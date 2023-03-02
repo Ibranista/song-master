@@ -91,3 +91,10 @@ export const updateSong: UpdateSongHandler = async (req, res) => {
     genre: updatedSong.genre,
   });
 };
+
+export const removeAllSongs = asyncHandler(async (req, res) => {
+  await Song.deleteMany({});
+  res.status(200).json({
+    message: "All songs deleted successfully",
+  });
+});

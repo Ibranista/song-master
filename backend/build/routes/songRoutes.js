@@ -9,4 +9,5 @@ const router = express_1.default.Router();
 router.post("/createSong", songController_1.createSong);
 router.get("/", songController_1.listSongs);
 router.put("/:id", songController_1.updateSong);
+router.delete("/removeAll", songController_1.removeAllSongs);
 exports.default = router;
