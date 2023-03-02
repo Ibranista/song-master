@@ -35,7 +35,9 @@ function* getAllSongs() {
 const addSongsUrl = "/api/songs/createSong";
 function* addSongs(action: any) {
   try {
-    const song: { data: any } = yield call(() => axios.post(addSongsUrl, Data));
+    const song: { data: any } = yield call(() =>
+      axios.post(addSongsUrl, action.payload)
+    );
     if (!song) {
       console.log("couldn`t register");
     }
@@ -47,6 +49,7 @@ function* addSongs(action: any) {
 
 function* songSaga() {
   yield takeEvery("songs/getSongsFetch", getAllSongs);
+  yield takeEvery("songs/addSong", addSongs);
 }
 
 export default songSaga;

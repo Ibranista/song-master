@@ -63,8 +63,8 @@ const SongGenre = styled.p`
 const SongList = ({ songs }: Props) => {
   return (
     <>
-      {songs.map((song) => (
-        <ContainerWrapper>
+      <ContainerWrapper>
+        {songs.map((song) => (
           <Container key={song._id}>
             <ImageContainer>
               <ArtistImage
@@ -81,8 +81,8 @@ const SongList = ({ songs }: Props) => {
               <SongGenre>Genre: {song.genre}</SongGenre>
             </SongDetailsContainer>
           </Container>
-        </ContainerWrapper>
-      ))}
+        ))}
+      </ContainerWrapper>
     </>
   );
 };
