@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeAllSongs = exports.updateSong = exports.listSongs = exports.createSong = void 0;
+exports.deleteSong = exports.removeAllSongs = exports.updateSong = exports.listSongs = exports.createSong = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const songModel_1 = __importDefault(require("../Models/songModel"));
 // @desc create a song
@@ -74,9 +74,25 @@ const updateSong = async (req, res) => {
     });
 };
 exports.updateSong = updateSong;
+// @desc delete all songs
+// @route DELETE /songs/removeAll
 exports.removeAllSongs = (0, express_async_handler_1.default)(async (req, res) => {
     await songModel_1.default.deleteMany({});
     res.status(200).json({
         message: "All songs deleted successfully",
+    });
+});
+//@delete a song
+//@route DELETE /songs/:id
+exports.deleteSong = (0, express_async_handler_1.default)(async (req, res) => {
+    const songId = req.params.id;
+    const query = { _id: songId };
+    const deletedSong = await songModel_1.default.findOneAndDelete(query);
+    if (!deletedSong) {
+        res.status(400);
+        throw new Error("song not found!");
+    }
+    res.status(200).json({
+        message: "song deleted successfully",
     });
 });

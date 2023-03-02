@@ -92,9 +92,26 @@ export const updateSong: UpdateSongHandler = async (req, res) => {
   });
 };
 
+// @desc delete all songs
+// @route DELETE /songs/removeAll
 export const removeAllSongs = asyncHandler(async (req, res) => {
   await Song.deleteMany({});
   res.status(200).json({
     message: "All songs deleted successfully",
+  });
+});
+
+//@delete a song
+//@route DELETE /songs/:id
+export const deleteSong = asyncHandler(async (req, res) => {
+  const songId = req.params.id;
+  const query = { _id: songId };
+  const deletedSong = await Song.findOneAndDelete(query);
+  if (!deletedSong) {
+    res.status(400);
+    throw new Error("song not found!");
+  }
+  res.status(200).json({
+    message: "song deleted successfully",
   });
 });
