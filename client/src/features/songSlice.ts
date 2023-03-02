@@ -17,10 +17,13 @@ export const songSlice = createSlice({
     getSongsFailure: (state) => {
       state.isLoading = false;
     },
+    addSong: (state, action) => {
+      state.songs.push(action.payload);
+    },
   },
 });
 
-export const { getSongsFetch, getSongsSuccess, getSongsFailure } =
+export const { getSongsFetch, getSongsSuccess, getSongsFailure,addSong } =
   songSlice.actions;
 
 export default songSlice.reducer;

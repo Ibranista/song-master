@@ -2,7 +2,12 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 
 // action methods
-import { getSongsFailure, getSongsFetch, getSongsSuccess } from "./songSlice";
+import {
+  addSong,
+  getSongsFailure,
+  getSongsFetch,
+  getSongsSuccess,
+} from "./songSlice";
 
 //getAllSongs url
 
@@ -21,6 +26,20 @@ function* getAllSongs() {
     );
     const formattedSongs: { data: any } = yield songs.json();
     yield put(getSongsSuccess(formattedSongs));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// add song
+const addSongsUrl = "/api/songs/createSong";
+function* addSongs(action: any) {
+  try {
+    const song: { data: any } = yield call(() => axios.post(addSongsUrl, Data));
+    if (!song) {
+      console.log("couldn`t register");
+    }
+    yield put(addSong(song));
   } catch (error) {
     console.log(error);
   }
