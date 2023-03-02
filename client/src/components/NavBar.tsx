@@ -17,7 +17,7 @@ function NavBar() {
     //   </section>
     // </div>
     <>
-      <NavBox bg="primary" color="white" width={[4, 1 / 2, 1 / 4]}>
+      <NavBox bg="primary" color="white">
         Thanks for Visiting!
       </NavBox>
     </>
