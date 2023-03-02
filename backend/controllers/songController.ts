@@ -11,30 +11,37 @@ export const createSong = asyncHandler(async (req, res) => {
     throw new Error("Please fill in all fields");
   }
 
-  const songExists = await Song.findOne({ title });
-  if (songExists) {
+  const existingSong = await Song.findOne({ title });
+  if (existingSong) {
     res.status(400).json({
       message: "Song already exists!",
     });
-  }
-
-  const song = await Song.create({
-    title,
-    artist,
-    album,
-    genre,
-  });
-
-  if (song) {
-    res.status(201).json({
-      _id: song._id,
-      title: song.title,
-      artist: song.artist,
-      album: song.album,
-      genre: song.genre,
-    });
   } else {
-    res.status(400);
-    throw new Error("Invalid song data");
+    const song = await Song.create({
+      title,
+      artist,
+      album,
+      genre,
+    });
+
+    if (song) {
+      res.status(201).json({
+        _id: song._id,
+        title: song.title,
+        artist: song.artist,
+        album: song.album,
+        genre: song.genre,
+      });
+    } else {
+      res.status(400);
+      throw new Error("Invalid song data");
+    }
   }
+});
+
+export const listSongs = asyncHandler(async (req, res) => {
+  const songs = await Song.find({});
+  res.status(200).json({
+    songs,
+  });
 });

@@ -7,4 +7,5 @@ const express_1 = __importDefault(require("express"));
 const songController_1 = require("../controllers/songController");
 const router = express_1.default.Router();
 router.post("/createSong", songController_1.createSong);
+router.get("/", songController_1.listSongs);
 exports.default = router;
