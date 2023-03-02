@@ -4,6 +4,7 @@ import reactLogo from "./assets/react.svg";
 import { Routes, Route } from "react-router-dom";
 // components
 import Home from "./components/Home";
+import NavBar from "./components/NavBar";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -12,6 +13,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/navbar" element={<NavBar />} />
       </Routes>
     </>
   );
