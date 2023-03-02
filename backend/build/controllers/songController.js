@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteSong = exports.removeAllSongs = exports.updateSong = exports.listSongs = exports.createSong = void 0;
+exports.getTotalSongCount = exports.deleteSong = exports.removeAllSongs = exports.updateSong = exports.listSongs = exports.createSong = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const songModel_1 = __importDefault(require("../Models/songModel"));
 // @desc create a song
@@ -95,4 +95,10 @@ exports.deleteSong = (0, express_async_handler_1.default)(async (req, res) => {
     res.status(200).json({
         message: "song deleted successfully",
     });
+});
+// @desc get total song count
+// @route GET /songs/count
+exports.getTotalSongCount = (0, express_async_handler_1.default)(async (req, res) => {
+    const count = await songModel_1.default.countDocuments();
+    res.json({ number_of_songs: count });
 });

@@ -11,4 +11,5 @@ router.get("/", songController_1.listSongs);
 router.put("/:id", songController_1.updateSong);
 router.delete("/removeAll", songController_1.removeAllSongs);
 router.delete("/:id", songController_1.deleteSong);
+router.get("/songCount", songController_1.getTotalSongCount);
 exports.default = router;

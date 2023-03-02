@@ -115,3 +115,10 @@ export const deleteSong = asyncHandler(async (req, res) => {
     message: "song deleted successfully",
   });
 });
+
+// @desc get total song count
+// @route GET /songs/count
+export const getTotalSongCount = asyncHandler(async (req, res) => {
+  const count = await Song.countDocuments();
+  res.json({ number_of_songs: count });
+});
