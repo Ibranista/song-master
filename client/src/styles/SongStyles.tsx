@@ -83,9 +83,9 @@ const SongList = () => {
 
   const [showEdit, setShowEdit] = useState(false);
   const [editSongId, setEditSongId] = useState("");
-  const [songData,setSongData] = useState("");
+  const [songData, setSongData] = useState("");
 
-  const handleEditClick = (id: string, data:any) => {
+  const handleEditClick = (id: string, data: any) => {
     setEditSongId(id);
     setShowEdit(true);
     setSongData(data);
@@ -112,18 +112,22 @@ const SongList = () => {
               <SongButton onClick={() => removeSong(song._id)}>
                 Delete Me
               </SongButton>
-              <SongButton onClick={() => handleEditClick(song._id, {
-                artist:song.artist,
-                title:song.title,
-                album:song.album,
-                genre:song.genre
-              })}>
+              <SongButton
+                onClick={() =>
+                  handleEditClick(song._id, {
+                    artist: song.artist,
+                    title: song.title,
+                    album: song.album,
+                    genre: song.genre,
+                  })
+                }
+              >
                 Edit Me
               </SongButton>
             </SongDetailsContainer>
           </Container>
         ))}
-        {showEdit && <EditSong id={editSongId} />}
+        {showEdit && <EditSong id={editSongId} songsData={songData} />}
       </ContainerWrapper>
     </>
   );
@@ -133,15 +137,11 @@ export default SongList;
 
 type EditSongProps = {
   id: string;
+  songsData: object;
 };
 
-const EditSong = ({ id }: EditSongProps) => {
-  const [song, setSong] = useState({
-    title: "",
-    artist: "",
-    album: "",
-    genre: "",
-  });
+const EditSong = ({ id, songsData }: EditSongProps) => {
+  const [song, setSong] = useState(songsData);
 
   const dispatch = useDispatch();
 
