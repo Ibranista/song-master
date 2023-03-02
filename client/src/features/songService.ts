@@ -7,6 +7,7 @@ import {
   getSongsFailure,
   getSongsFetch,
   getSongsSuccess,
+  editSong
 } from "./songSlice";
 
 //getAllSongs url
@@ -48,11 +49,24 @@ function* addSongs(action: any) {
 }
 // remove one song
 const removeSongUrl = "/api/songs/";
-function* removeSong(action: any) {
+function* removeSong(action: string) {
+  try {
+    yield call(() => axios.delete(removeSongUrl + action.payload));
+  } catch (error) {
+    console.log(error);
+  }
+}
+//edit a song
+const editSongUrl = "/api/songs/";
+function* editSongs(action: any) {
   try {
     const song: { data: any } = yield call(() =>
-      axios.delete(removeSongUrl + action.payload)
+      axios.put(`${editSongUrl}/${action.payload.id}`, action.payload.data)
     );
+    if (!song) {
+      console.log("couldn`t update");
+    }
+    yield put(editSong(action.payload));
   } catch (error) {
     console.log(error);
   }
@@ -62,6 +76,7 @@ function* songSaga() {
   yield takeEvery("songs/getSongsFetch", getAllSongs);
   yield takeEvery("songs/addSong", addSongs);
   yield takeEvery("songs/removeOneSong", removeSong);
+  yield takeEvery("songs/editSong", editSongs);
 }
 
 export default songSaga;

@@ -25,6 +25,15 @@ export const songSlice = createSlice({
     removeOneSong: (state, action) => {
       state.songs;
     },
+    editSong: (state, action) => {
+      const { id, data } = action.payload;
+      const songIndex = state.songs.findIndex((song) => song.id === id);
+      if (songIndex >= 0) {
+        state.songs[songIndex] = { ...state.songs[songIndex], ...data };
+        console.log("edit song: ", action.payload);
+        console.log(state.songs);
+      }
+    },
   },
 });
 
@@ -34,6 +43,7 @@ export const {
   getSongsFailure,
   addSong,
   removeOneSong,
+  editSong,
 } = songSlice.actions;
 
 export default songSlice.reducer;
