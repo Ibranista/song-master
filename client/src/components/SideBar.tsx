@@ -55,7 +55,7 @@ const SidebarContainer = styled.div`
   position: relative;
 `;
 
-const CollapsibleSidebar = ({children}) => {
+function CollapsibleSidebar({ children }): JSX.Element {
   const [collapsed, setCollapsed] = useState(false);
 
   const handleToggle = () => {
@@ -90,9 +90,9 @@ const CollapsibleSidebar = ({children}) => {
         <h1>Main Content</h1>
         {children}
       </MainContent>
-        {/* {children} */}
+      {/* {children} */}
     </Container>
   );
-};
+}
 
 export default CollapsibleSidebar;

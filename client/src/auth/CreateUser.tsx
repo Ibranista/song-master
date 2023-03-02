@@ -9,25 +9,27 @@ function CreateUser() {
     email: "",
     password: "",
   });
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  const createAccount = async (e: React.FormEvent<HTMLFormElement>) => {
+  // createUserWithEmailAndPassword
+  const createAccount = async (e: any) => {
     e.preventDefault();
     try {
-      let user = await createUserWithEmailAndPassword(
+      let users = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
-      await updateProfile(user.user, { displayName: formData.displayName });
-      toast.success("account created successfully");
-    } catch (err) {
-      toast.error("could not create account");
+      await updateProfile(users.user, {
+        displayName: formData.displayName,
+      });
+      toast.success("user successfully created!");
+    } catch (e: any) {
+      toast.error(e.message);
     }
   };
+
   return (
     <>
       <form action="">
@@ -69,3 +71,5 @@ function CreateUser() {
     </>
   );
 }
+
+export default CreateUser;
