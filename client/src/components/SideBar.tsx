@@ -85,7 +85,7 @@ function CollapsibleSidebar({ children }): JSX.Element {
             </SidebarLink>
           </SidebarItem>
           <SidebarItem mb={3}>
-            <SidebarLink color="#fff" href="/About">
+            <SidebarLink color="#fff" href="/Total">
               Total Statistics
             </SidebarLink>
           </SidebarItem>

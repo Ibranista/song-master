@@ -8,6 +8,7 @@ import NavBar from "./components/NavBar";
 import AddSong from "./components/AddSong";
 import Sidebar from "./components/SideBar";
 import AccountCreation from "./components/AccountCreation";
+import TotalStatistics from "./components/TotalStatistics";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -20,6 +21,7 @@ function App() {
         <Route path="/addSong" element={<AddSong />} />
         <Route path="/sideBar" element={<Sidebar />} />
         <Route path="/AccountCreation" element={<AccountCreation />} />
+        <Route path="/Total" element={<TotalStatistics />} />
       </Routes>
     </>
   );
