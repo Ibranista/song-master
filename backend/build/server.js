@@ -29,6 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv = __importStar(require("dotenv"));
 const db_js_1 = __importDefault(require("./config/db.js"));
+const songRoutes_js_1 = __importDefault(require("./routes/songRoutes.js"));
 dotenv.config();
 const PORT = process.env.PORT || 7000;
 (0, db_js_1.default)();
@@ -41,3 +42,4 @@ app.use(express_1.default.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
     res.send("port is working");
 });
+app.use("/songs", songRoutes_js_1.default);
