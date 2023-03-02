@@ -1,3 +1,4 @@
+import { RequestHandler } from "express";
 import asyncHandler from "express-async-handler";
 import Song from "../Models/songModel";
 
@@ -39,9 +40,54 @@ export const createSong = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc list songs
+// @route GET /songs
 export const listSongs = asyncHandler(async (req, res) => {
   const songs = await Song.find({});
   res.status(200).json({
     songs,
   });
 });
+
+// @desc update a song
+// @route PUT /songs/:id
+
+type UpdateSongHandler = RequestHandler<
+  { id: string },
+  | { message: string }
+  | {
+      _id: any;
+      title: string;
+      artist: string;
+      album: string;
+      genre: string;
+    },
+  Partial<{ title: string; artist: string; album: string; genre: string }>,
+  never
+>;
+
+export const updateSong: UpdateSongHandler = async (req, res) => {
+  const songId = req.params.id;
+  const updatedSongData = req.body;
+  const query = { _id: songId };
+
+  if (!query) {
+    res.status(400);
+    throw new Error("song not found!");
+  }
+
+  const updatedSong = await Song.findOneAndUpdate(query, updatedSongData, {
+    new: true,
+  });
+  if (!updatedSong) {
+    res.status(400);
+    throw new Error("song not found!");
+  }
+  res.status(200).json({
+    _id: updatedSong._id,
+    title: updatedSong.title,
+    artist: updatedSong.artist,
+    album: updatedSong.album,
+    genre: updatedSong.genre,
+  });
+};

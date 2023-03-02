@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.listSongs = exports.createSong = void 0;
+exports.updateSong = exports.listSongs = exports.createSong = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const songModel_1 = __importDefault(require("../Models/songModel"));
 // @desc create a song
@@ -42,9 +42,35 @@ exports.createSong = (0, express_async_handler_1.default)(async (req, res) => {
         }
     }
 });
+// @desc list songs
+// @route GET /songs
 exports.listSongs = (0, express_async_handler_1.default)(async (req, res) => {
     const songs = await songModel_1.default.find({});
     res.status(200).json({
         songs,
     });
 });
+const updateSong = async (req, res) => {
+    const songId = req.params.id;
+    const updatedSongData = req.body;
+    const query = { _id: songId };
+    if (!query) {
+        res.status(400);
+        throw new Error("song not found!");
+    }
+    const updatedSong = await songModel_1.default.findOneAndUpdate(query, updatedSongData, {
+        new: true,
+    });
+    if (!updatedSong) {
+        res.status(400);
+        throw new Error("song not found!");
+    }
+    res.status(200).json({
+        _id: updatedSong._id,
+        title: updatedSong.title,
+        artist: updatedSong.artist,
+        album: updatedSong.album,
+        genre: updatedSong.genre,
+    });
+};
+exports.updateSong = updateSong;
