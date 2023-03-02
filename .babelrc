@@ -1,0 +1,7 @@
+{
+  "presets": ["env", "stage-0"]
+}
+
+// npm install --save-dev babel-cli babel-preset-env babel-preset-stage-0
+// npm install body-parser express mongoose nodemon
+// npm install cors
