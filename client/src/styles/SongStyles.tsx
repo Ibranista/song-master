@@ -127,7 +127,13 @@ const SongList = () => {
             </SongDetailsContainer>
           </Container>
         ))}
-        {showEdit && <EditSong id={editSongId} songsData={songData} />}
+        {showEdit && (
+          <EditSong
+            id={editSongId}
+            songsData={songData}
+            editStatus={setShowEdit}
+          />
+        )}
       </ContainerWrapper>
     </>
   );
@@ -137,10 +143,11 @@ export default SongList;
 
 type EditSongProps = {
   id: string;
-  songsData: object;
+  songsData: any;
+  editStatus: any;
 };
 
-const EditSong = ({ id, songsData }: EditSongProps) => {
+const EditSong = ({ id, songsData, editStatus }: EditSongProps) => {
   const [song, setSong] = useState(songsData);
 
   const dispatch = useDispatch();
@@ -153,6 +160,7 @@ const EditSong = ({ id, songsData }: EditSongProps) => {
     e.preventDefault();
     try {
       dispatch(editSong({ id, data: song }));
+      editStatus(false);
     } catch (error) {
       console.log(error);
     }
