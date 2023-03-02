@@ -1,8 +1,6 @@
+import styled from "styled-components";
 import { color } from "styled-system";
-import styled from "styled-system";
 
-const Box = styled.div`
+export const NavBarStyle = styled.div`
   ${color}
 `;
-
-export default Box;
