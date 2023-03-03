@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { space, layout, color } from "styled-system";
-
+import { Link } from "react-router-dom";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -70,24 +70,24 @@ function CollapsibleSidebar({ children }): JSX.Element {
         </SidebarToggle>
         <Sidebar width={collapsed ? "64px" : "200px"} height="100vh" p={3}>
           <SidebarItem mb={3}>
-            <SidebarLink color="#fff" href="/">
-              Home
-            </SidebarLink>
+            <Link to="/">
+              <SidebarLink color="#fff">Home</SidebarLink>
+            </Link>
           </SidebarItem>
           <SidebarItem mb={3}>
-            <SidebarLink color="#fff" href="/addSong">
-              Add Song
-            </SidebarLink>
+            <Link to="/addSong">
+              <SidebarLink color="#fff">Add Song</SidebarLink>
+            </Link>
           </SidebarItem>
           <SidebarItem mb={3}>
-            <SidebarLink color="#fff" href="/About">
-              About
-            </SidebarLink>
+            <Link to="/about">
+              <SidebarLink color="#fff">About</SidebarLink>
+            </Link>
           </SidebarItem>
           <SidebarItem mb={3}>
-            <SidebarLink color="#fff" href="/Total">
-              Total Statistics
-            </SidebarLink>
+            <Link to="/total">
+              <SidebarLink color="#fff">Total Statistics</SidebarLink>
+            </Link>
           </SidebarItem>
         </Sidebar>
       </SidebarContainer>

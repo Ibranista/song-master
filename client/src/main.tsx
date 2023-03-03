@@ -25,6 +25,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 );
 
 import { auth } from "./auth/firebase";
+import { Toaster } from "react-hot-toast";
 
 function Conditional({ children }): any {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
@@ -33,11 +34,12 @@ function Conditional({ children }): any {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setIsUserSignedIn(true);
+      if (!isUserSignedIn) {
+        navigate("/AccountCreation");
+      }
+      navigate("/");
     });
 
-    if (!isUserSignedIn) {
-      navigate("/AccountCreation");
-    }
     return unsubscribe;
   }, []);
 
