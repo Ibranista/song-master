@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 // import "./index.css";
@@ -27,22 +27,29 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 import { auth } from "./auth/firebase";
 import { Toaster } from "react-hot-toast";
 
-function Conditional({ children }) {
+interface ConditionalProps {
+  children: React.ReactNode;
+}
+
+function Conditional({ children }: ConditionalProps): JSX.Element | null {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const navigate = useNavigate();
-
+ const [user, setUser] = useState<object|any | null>(null);
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setIsUserSignedIn(true);
+      if (user) {
+        setIsUserSignedIn(true);
+        setUser(user);
+      } else {
+        setIsUserSignedIn(false);
+        navigate("/AccountCreation");
+      }
     });
 
-    return unsubscribe;
-  }, []);
+    return () => unsubscribe();
+  }, [navigate]);
 
-  if (!isUserSignedIn) {
-    navigate("/AccountCreation");
-    return null;
-  }
-
-  return children;
+  return <>
+  <h1>signedin as: {user?.displayName}</h1>
+  {children}</>;
 }
