@@ -92,7 +92,7 @@ function CollapsibleSidebar({ children }): JSX.Element {
         </Sidebar>
       </SidebarContainer>
       <MainContent width="100%" p={3}>
-        <h1>Main Content</h1>
+        {/* <h1>Main Content</h1> */}
         {children}
       </MainContent>
       {/* {children} */}

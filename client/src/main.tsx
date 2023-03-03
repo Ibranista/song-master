@@ -29,19 +29,17 @@ import { auth } from "./auth/firebase";
 function Conditional({ children }): any {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setIsUserSignedIn(!!user);
+      setIsUserSignedIn(true);
     });
 
+    if (!isUserSignedIn) {
+      navigate("/AccountCreation");
+    }
     return unsubscribe;
   }, []);
-
-  if (!isUserSignedIn) {
-    navigate("/");
-    return null;
-  }
 
   return children;
 }
