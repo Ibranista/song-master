@@ -18,7 +18,7 @@ function NavBar() {
     // </div>
     <>
       <NavBox bg="primary" color="white">
-        Thanks for Visiting!
+        Explore Options !
       </NavBox>
     </>
   );

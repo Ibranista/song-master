@@ -29,11 +29,9 @@ const NavLink = styled.li`
 
 const NavBox = ({ children, ...rest }) => (
   <NavContainer {...rest}>
-    <NavLogo>My Site</NavLogo>
+    <NavLogo>Welcome to songs master</NavLogo>
     <NavLinks>
-      <NavLink>Home</NavLink>
-      <NavLink>About</NavLink>
-      <NavLink>Contact</NavLink>
+      <NavLink>Songs-Master</NavLink>
     </NavLinks>
     {children}
   </NavContainer>
