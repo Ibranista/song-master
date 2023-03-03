@@ -65,6 +65,26 @@ function TotalStatistics() {
       </div>
     );
   }
+  const albumCount: any = {};
+  for (let i = 0; i < songs.length; i++) {
+    let album = songs[i].album;
+    if (album in albumCount) {
+      albumCount[album].songs++;
+    } else {
+      albumCount[album] = {
+        songs: 1,
+      };
+    }
+  }
+  const albumNumbers: any = [];
+  for (const [album, count] of Object.entries(albumCount)) {
+    albumNumbers.push(
+      <div key={album}>
+        <h1>{album}</h1>
+        <h2>Total songs: {count.songs}</h2>
+      </div>
+    );
+  }
   return (
     <div>
       <h1>Total Statistics</h1>
@@ -90,6 +110,10 @@ function TotalStatistics() {
       <section>
         <h1>Total of songs & albums each artist has</h1>
         {artistNumbers}
+      </section>
+      <section>
+        <h1>Total of songs each album has</h1>
+        {albumNumbers}
       </section>
     </div>
   );
