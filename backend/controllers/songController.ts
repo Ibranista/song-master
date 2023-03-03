@@ -44,9 +44,7 @@ export const createSong = asyncHandler(async (req, res) => {
 // @route GET /songs
 export const listSongs = asyncHandler(async (req, res) => {
   const songs = await Song.find({});
-  res.status(200).json({
-    songs,
-  });
+  res.status(200).send(songs);
 });
 
 // @desc update a song
